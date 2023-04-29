@@ -7,8 +7,8 @@ export type FriendMessagePropsType = {
     message: {
         id: number,
         user: {
-            avatar: string,
-            name: string,
+            avatar: string
+            name: string
         }
         message: {
             text: string
