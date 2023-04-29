@@ -39,6 +39,7 @@ export const message0: MessageType = {
         time: '09:01', // можно менять
     },
 }
+
 export const friendMessage0: MessageType = {
     id: 100,
     user: {
