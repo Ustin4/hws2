@@ -39,7 +39,9 @@ const defaultAffairs: AffairType[] = [ // need to fix any
 
 // pure helper functions
 export const filterAffairs = (affairs: AffairType[], filter: FilterType): AffairType[] => { // need to fix any
-    switch (filter) {
+    if (filter !== "all") return affairs.filter((affair: AffairType) => affair.priority === filter)
+    return affairs
+    /*switch (filter) {
         case 'high':
             return affairs.filter(a => a.priority === filter)
         case 'low':
@@ -48,14 +50,15 @@ export const filterAffairs = (affairs: AffairType[], filter: FilterType): Affair
             return affairs.filter(a => a.priority === filter)
         default:
             return affairs
-    }
+    }*/
+
     //если пришел фильтр "all"...может нам вообще не фильтровать, а вернуть все?
     //а вот если пришло другое значение...
 }
 
 export const deleteAffair = (affairs: AffairType[], _id: number): AffairType[] => {
-    const UpdatedAffair = affairs.filter((affairs: AffairType) => affairs._id !== _id)
-    return UpdatedAffair
+
+    return  affairs.filter((affair: AffairType) => affair._id !== _id)
 }
 
 function HW2() {
