@@ -34,13 +34,28 @@ function Clock() {
         setShow(false)
     }
 
-    const stringTime = new Date().toLocaleTimeString() || <br/> // часы24:минуты:секунды (01:02:03)/(23:02:03)/(24:00:00)/(00:00:01) // пишут студенты
-    const stringDate = new Date().toLocaleDateString() || <br/> // день.месяц.год (01.02.2022) // пишут студенты, варианты 01.02.0123/01.02.-123/01.02.12345 не рассматриваем
+
+
+
+    const stringTime = new Intl.DateTimeFormat('en-US', {
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    }).format(date) || <br/> // часы24:минуты:секунды (01:02:03)/(23:02:03)/(24:00:00)/(00:00:01) // пишут студенты
+
+    const stringDate = new Intl.DateTimeFormat('ru-RU', {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    }).format(date) || <br/> // день.месяц.год (01.02.2022) // пишут студенты, варианты 01.02.0123/01.02.-123/01.02.12345 не рассматриваем
 
     // день недели на английском, месяц на английском (https://learn.javascript.ru/intl#intl-datetimeformat)
-    const formatter = new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long' });
-    const stringDay =  formatter.format(new Date()) //'date->day' || <br/> // пишут студенты
-    const stringMonth = formatter.formatToParts(new Date())[0].value//'date->month' || <br/> // пишут студенты
+
+
+        const stringDay = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(date); //'date->day' || <br/> // пишут студенты
+
+    const stringMonth =  new Intl.DateTimeFormat('en-US', {month: 'long'}).format(date)//'date->month' || <br/> // пишут студенты
 
     return (
         <div className={s.clock}>
