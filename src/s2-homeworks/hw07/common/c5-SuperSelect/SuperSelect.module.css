@@ -1,4 +1,8 @@
 .select {
+float: left;
+    margin-right: 10px;
+    min-height: 20px;
+    min-width: 90px;
 }
 
 .select:focus {

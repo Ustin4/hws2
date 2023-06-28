@@ -1,11 +1,19 @@
 .spanBlock {
+    padding: 2px;
+
 }
 
 .span {
+
+    color: #0059b3;
 }
 
 .input {
+
+    padding: 2px;
 }
 
 .pen {
+
+    padding: 2px;
 }

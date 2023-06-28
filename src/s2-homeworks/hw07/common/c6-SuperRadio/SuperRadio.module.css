@@ -1,15 +1,24 @@
 .radio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
 }
 
 .radio::before {
+    margin-right: 10px;
 }
 
-
 .radio:checked::before {
+    margin-right: 10px;
 }
 
 .label {
+    display: flex;
+    flex-direction: row;
+
 }
 
 .options {
+    margin: 0px 150px;
 }
