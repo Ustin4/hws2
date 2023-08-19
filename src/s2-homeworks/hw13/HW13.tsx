@@ -34,12 +34,32 @@ const HW13 = () => {
         axios
             .post(url, {success: x})
             .then((res) => {
-                setCode('Код 200!')
-                setImage(success200)
+                if (res.data.success === true) {
+                    setCode('Код 200!')
+                    setImage(success200)
+                    setText(res.data.text)
+                    setInfo('Request successful')
+                } else if (res.data.success === false){
+                    setCode('Код 400')
+                    setText('Error 400: Bad Request')
+                    setImage(error400)
+                    setInfo(res.statusText)
+                }else if(res.data.success === undefined){
+                    setCode('Код 500')
+                    setText('Error 500: Internal Server Error')
+                    setImage(error500)
+                    setInfo(res.statusText)
+                }else {
+                    setCode('Unknown Error')
+                    setText('Unknown Error')
+                    setImage(errorUnknown)
+                    setInfo(res.statusText)
+                }
                 // дописать
 
             })
             .catch((e) => {
+                console.warn(e)
                 // дописать
 
             })
@@ -55,6 +75,7 @@ const HW13 = () => {
                         id={'hw13-send-true'}
                         onClick={send(true)}
                         xType={'secondary'}
+                        disabled={info === '...loading'}
                         // дописать
 
                     >
@@ -64,6 +85,7 @@ const HW13 = () => {
                         id={'hw13-send-false'}
                         onClick={send(false)}
                         xType={'secondary'}
+                        disabled={info === '...loading'}
                         // дописать
 
                     >
@@ -73,6 +95,7 @@ const HW13 = () => {
                         id={'hw13-send-undefined'}
                         onClick={send(undefined)}
                         xType={'secondary'}
+                        disabled={info === '...loading'}
                         // дописать
 
                     >
@@ -82,6 +105,7 @@ const HW13 = () => {
                         id={'hw13-send-null'}
                         onClick={send(null)} // имитация запроса на не корректный адрес
                         xType={'secondary'}
+                        disabled={info === '...loading'}
                         // дописать
 
                     >
