@@ -24,7 +24,7 @@ const HW13 = () => {
         const url =
             x === null
                 ? 'https://xxxxxx.ccc' // имитация запроса на не корректный адрес
-                : 'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test'
+                : 'https://samurai.it-incubator.io/api/3.0/homework/test'
 
         setCode('')
         setImage('')
@@ -34,32 +34,34 @@ const HW13 = () => {
         axios
             .post(url, {success: x})
             .then((res) => {
-                if (res.data.success === true) {
+                if (res.status === 200) {
                     setCode('Код 200!')
                     setImage(success200)
-                    setText(res.data.text)
-                    setInfo('Request successful')
-                } else if (res.data.success === false){
-                    setCode('Код 400')
-                    setText('Error 400: Bad Request')
-                    setImage(error400)
-                    setInfo(res.statusText)
-                }else if(res.data.success === undefined){
-                    setCode('Код 500')
-                    setText('Error 500: Internal Server Error')
-                    setImage(error500)
-                    setInfo(res.statusText)
-                }else {
-                    setCode('Unknown Error')
-                    setText('Unknown Error')
-                    setImage(errorUnknown)
-                    setInfo(res.statusText)
+                    setText(res.data.errorText)
+                    setInfo(res.data.info)
                 }
                 // дописать
 
             })
             .catch((e) => {
-                console.warn(e)
+                if(e.response){
+                    if (e.response.status === 400){
+                        setCode('Ошибка 400!')
+                        setText(e.response.data.errorText)
+                        setImage(error400)
+                        setInfo(e.response.data.info)
+                    }else if(e.response.status === 500){
+                        setCode('Ошибка 500!')
+                        setImage(error500)
+                        setText(e.response.data.errorText)
+                        setInfo(e.response.data.info)
+                    }else {
+                        setCode('Error!')
+                        setText('Network Error')
+                        setImage(errorUnknown)
+                        setInfo('AxiosError')
+                    }
+                }
                 // дописать
 
             })
@@ -134,5 +136,29 @@ const HW13 = () => {
         </div>
     )
 }
+
+
+//
+// if (res.data.success === true) {
+//     setCode('Код 200!')
+//     setImage(success200)
+//     setText(res.data.text)
+//     setInfo('Request successful')
+// } else if (res.data.success === false){
+//     setCode('Код 400')
+//     setText('Error 400: Bad Request')
+//     setImage(error400)
+//     setInfo(res.statusText)
+// }else if(res.data.success === undefined){
+//     setCode('Код 500')
+//     setText('Error 500: Internal Server Error')
+//     setImage(error500)
+//     setInfo(res.statusText)
+// }else {
+//     setCode('Unknown Error')
+//     setText('Unknown Error')
+//     setImage(errorUnknown)
+//     setInfo(res.statusText)
+// }
 
 export default HW13
